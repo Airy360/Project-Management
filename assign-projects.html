@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Assignment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Assign Projects</h1>
+            <p>Track and manage your projects effortlessly.</p>
+        </div>
+    </header>
+    <form class="data-entry-bar">
+        <label for="project-name">Project Name:</label>
+        <input type="text" id="project-name" name="project-name" placeholder="Enter project name" required>
+    
+        <label for="project-scope">Project Scope:</label>
+        <select id="project-scope" name="project-scope" required>
+            <option value="" disabled selected>Select scope</option>
+            <option value="editing-proofreading">Editing and Proofreading</option>
+            <option value="editorial-review">Editorial Review</option>
+            <option value="critique">Critique</option>
+            <option value="video-trailer-script">Video Trailer Script</option>
+            <option value="writing">Writing</option>
+            <option value="revisions">Revisions</option>
+            <option value="next-set">Next Set</option>
+            <option value="ocr-conversion">OCR Conversion</option>
+        </select>
+    
+        <label for="writer-name">Writer Name:</label>
+        <select id="writer-name" name="writer-name" required>
+            <option value="" disabled selected>Select writer</option>
+            <option value="qirat">Qirat</option>
+            <option value="anum">Anum</option>
+            <option value="zarish">Zarish</option>
+            <option value="falak">Falak</option>
+            <option value="nabeel">Nabeel</option>
+            <option value="mubashir">Mubashir</option>
+            <option value="yasir">Yasir</option>
+            <option value="muskan">Muskan</option>
+            <option value="jawwad">Jawwad</option>
+            <option value="areeb">Areeb</option>
+            <option value="zafir">Zafir</option>
+        </select>
+    
+        <label for="due-date">Due Date:</label>
+        <input type="date" id="due-date" name="due-date" required>
+    
+        <button type="submit" id="submit">Submit</button>
+    </form>
+    <script src="index.js"></script>
+</body>
+</html>
