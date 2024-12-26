@@ -27,7 +27,7 @@ document.getElementById("lookup-button").addEventListener("click", () => {
     return;
   }
 
-  const projectRef = ref(db, 'projects/' + projectName);
+  const projectRef = ref(db, 'user/' + projectName);
 
   get(projectRef)
     .then((snapshot) => {
