@@ -33,11 +33,13 @@ document.getElementById("submit").addEventListener("click", function(e) {
   const projectName = document.getElementById("project-name").value;
   const projectScope = document.getElementById("project-scope").value;
   const writerName = document.getElementById("writer-name").value;
+  const dueDate = document.getElementById("due-date").value;
 
   set(ref(db, 'user/' + projectName), {
       project: projectName,
       projectscope: projectScope,
       writername: writerName,
+      duedate: dueDate
   })
   .then(() => {
       alert("Project Has Been Added to the Database");
