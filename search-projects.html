@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Lookup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Project Lookup</h1>
+            <p>Find details about your project.</p>
+        </div>
+    </header>
+    <main>
+        <form class="data-entry-bar">
+            <label for="project-name">Enter Project Name:</label>
+            <input type="text" id="project-name" name="project-name" placeholder="Enter project name" required>
+            <button type="button" id="lookup">Search</button>
+        </form>
+        <div id="project-details" class="project-details hidden">
+            <h2>Project Details</h2>
+            <p><strong>Project Name:</strong> <span id="display-project-name"></span></p>
+            <p><strong>Writer Name:</strong> <span id="display-writer-name"></span></p>
+            <p><strong>Due Date:</strong> <span id="display-due-date"></span></p>
+        </div>
+        <p id="error-message" class="error hidden">Project not found. Please check the name and try again.</p>
+    </main>
+    <script src="lookup.js" type="module"></script>
+</body>
+</html>
