@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 // Lookup functionality
-document.getElementById("lookup").addEventListener("click", () => {
+document.getElementById("lookup-button").addEventListener("click", () => {
   const projectName = document.getElementById("project-name").value.trim();
 
   if (!projectName) {
