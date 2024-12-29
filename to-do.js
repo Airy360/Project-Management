@@ -39,63 +39,64 @@ function fetchAndDisplayProjects() {
         // Create a row
         const row = document.createElement("tr");
 
-        // Columns: Project Name, Due Date, Assigned Writer, Status, Submission, Actions
+        // Columns: Project Name, Due Date, Assigned Writer, Status
         row.innerHTML = `
           <td>${project.project}</td>
-          <td><input type="date" value="${project.duedate || ""}" class="due-date"></td>
-          <td>${project.writername}</td>
+          <td><input type="date" value="${project.duedate || ""}" class="due-date" data-project="${projectName}"></td>
+          <td><input type="text" value="${project.writername || ""}" class="writer-name" data-project="${projectName}"></td>
           <td>
-            <select class="status">
+            <select class="status" data-project="${projectName}">
               <option value="Not Started" ${project.status === "Not Started" ? "selected" : ""}>Not Started</option>
               <option value="In Progress" ${project.status === "In Progress" ? "selected" : ""}>In Progress</option>
               <option value="Completed" ${project.status === "Completed" ? "selected" : ""}>Completed</option>
             </select>
-          </td>
-          <td>
-            <input type="text" value="${project.submission || ""}" class="submission">
-          </td>
-          <td>
-            <button class="save-button" data-project="${projectName}">Save</button>
           </td>
         `;
 
         tableBody.appendChild(row);
       });
 
-      // Add event listeners to Save buttons
-      document.querySelectorAll(".save-button").forEach((button) => {
-        button.addEventListener("click", handleSave);
+      // Add event listeners for auto-save
+      document.querySelectorAll(".due-date").forEach((input) => {
+        input.addEventListener("change", handleUpdate);
+      });
+      document.querySelectorAll(".writer-name").forEach((input) => {
+        input.addEventListener("blur", handleUpdate);
+      });
+      document.querySelectorAll(".status").forEach((select) => {
+        select.addEventListener("change", handleUpdate);
       });
     } else {
-      tableBody.innerHTML = "<tr><td colspan='6'>No projects found.</td></tr>";
+      tableBody.innerHTML = "<tr><td colspan='4'>No projects found.</td></tr>";
     }
   }).catch((error) => {
     console.error("Error fetching data:", error);
   });
 }
 
-// Function to handle save updates
-function handleSave(event) {
-  const button = event.target;
-  const projectName = button.dataset.project;
+// Function to handle automatic updates
+function handleUpdate(event) {
+  const element = event.target;
+  const projectName = element.dataset.project;
 
-  // Get the row data
-  const row = button.closest("tr");
-  const dueDate = row.querySelector(".due-date").value;
-  const status = row.querySelector(".status").value;
-  const submission = row.querySelector(".submission").value;
+  // Determine what field is being updated
+  const field = element.classList.contains("due-date")
+    ? "duedate"
+    : element.classList.contains("writer-name")
+    ? "writername"
+    : "status";
+
+  const value = element.value;
 
   // Update the database
   const projectRef = ref(db, `user/${projectName}`);
-  update(projectRef, {
-    duedate: dueDate,
-    status: status,
-    submission: submission
-  }).then(() => {
-    alert(`Project "${projectName}" updated successfully!`);
-  }).catch((error) => {
-    console.error("Error updating project:", error);
-  });
+  update(projectRef, { [field]: value })
+    .then(() => {
+      console.log(`Project "${projectName}" updated: ${field} = ${value}`);
+    })
+    .catch((error) => {
+      console.error("Error updating project:", error);
+    });
 }
 
 // Call the function to populate the table on page load
