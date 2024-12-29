@@ -1,3 +1,7 @@
+window.addEventListener('load', () => {
+    document.querySelector('.header-content').classList.add('visible');
+});
+
 // Import Firebase SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
