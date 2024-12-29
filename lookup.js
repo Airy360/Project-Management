@@ -1,3 +1,6 @@
+window.addEventListener('load', () => {
+    document.querySelector('.header-content').classList.add('visible');
+});
 // Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
