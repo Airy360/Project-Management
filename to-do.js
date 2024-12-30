@@ -23,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 // List of writers
-const writerList = ["Alice", "Bob", "Charlie", "Dana", "Eve"]; // Replace with actual writer names
+const writerList = ["mubashir", "areeb", "nabeel", "yasir", "muskan", "jawwad", "zafir", "falak", "anum", "qirat", "zarish"]; // Replace with actual writer names
 
 // Function to fetch data and populate the table
 function fetchAndDisplayProjects() {
