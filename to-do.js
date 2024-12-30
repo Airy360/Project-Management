@@ -22,6 +22,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// List of writers
+const writerList = ["Alice", "Bob", "Charlie", "Dana", "Eve"]; // Replace with actual writer names
+
 // Function to fetch data and populate the table
 function fetchAndDisplayProjects() {
   const tableBody = document.querySelector("#project-table tbody");
@@ -39,11 +42,25 @@ function fetchAndDisplayProjects() {
         // Create a row
         const row = document.createElement("tr");
 
+        // Create a dropdown for writer names
+        const writerOptions = writerList
+          .map(
+            (writer) =>
+              `<option value="${writer}" ${
+                project.writername === writer ? "selected" : ""
+              }>${writer}</option>`
+          )
+          .join("");
+
         // Columns: Project Name, Due Date, Assigned Writer, Status
         row.innerHTML = `
           <td>${project.project}</td>
           <td><input type="date" value="${project.duedate || ""}" class="due-date" data-project="${projectName}"></td>
-          <td><input type="text" value="${project.writername || ""}" class="writer-name" data-project="${projectName}"></td>
+          <td>
+            <select class="writer-name" data-project="${projectName}">
+              ${writerOptions}
+            </select>
+          </td>
           <td>
             <select class="status" data-project="${projectName}">
               <option value="Not Started" ${project.status === "Not Started" ? "selected" : ""}>Not Started</option>
@@ -60,8 +77,8 @@ function fetchAndDisplayProjects() {
       document.querySelectorAll(".due-date").forEach((input) => {
         input.addEventListener("change", handleUpdate);
       });
-      document.querySelectorAll(".writer-name").forEach((input) => {
-        input.addEventListener("blur", handleUpdate);
+      document.querySelectorAll(".writer-name").forEach((select) => {
+        select.addEventListener("change", handleUpdate);
       });
       document.querySelectorAll(".status").forEach((select) => {
         select.addEventListener("change", handleUpdate);
